@@ -1,0 +1,53 @@
+﻿@addTagHelper"*,Microsoft.AspNet.Mvc.TagHelpers"
+
+<div>
+    <center>
+        <p style="font-family: 'Comic Sans MS'; font-size: 20px;">Forums</p>
+        <ul>
+            <li><a asp-action="#">My Page</a></li>
+            <li><a asp-action="#">Activity</a></li>
+            <li><a asp-action="#">Forums</a></li>
+            <li><input id="loginbutton" type="submit" value="Login" /></li>
+        </ul>
+    </center>
+</div>
+
+<div id="square">
+
+</div>
+
+<script src="~/scripts/jquery.js"></script>
+<script>
+    $("#loginbutton").click(function()
+    {
+        alert("Button pressed");   
+    })
+</script>
+
+<style>
+    #loginbutton {
+        font-family: Comic Sans MS;
+        background-color: white;
+        border: none;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 17px;
+    }
+    #square {
+        width: 90%;
+        margin: 0 auto;
+    }
+    ul {
+        padding: 0;
+    }
+    li {
+        display: inline;
+    }
+    a {
+        color: black;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px 4px 0 0;
+    }
+</style>

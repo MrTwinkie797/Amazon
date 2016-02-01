@@ -1,0 +1,66 @@
+﻿@model ListEngineViewModel[]
+
+<!--Engine part of code-->
+<center><p style="font-family: 'Comic Sans MS'; font-size: 20px;">Information</p></center>
+<div id="Isquare">
+    <form>
+        <div id="tyuio">
+                    <h3>Engine-types</h3> 
+            @foreach (var item in Model)
+            {
+                <div onmouseover="getPartial(@item.Id)" onmouseout="null">
+                    @item.Type<br />
+                </div>
+            }
+        </div>
+        <div id="divResult">
+                <!--<input id="jsonbutton" type="button" value="GetJson" />-->
+        </div>
+
+</form>
+</div><!--IsquareEndtag-->
+
+<!--Chassi part of code-->
+<!--Something part of code-->
+
+<script src="~/Scripts/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    function getPartial(id) {
+        $.get("/home/GetPartialView",
+            { id: id },
+            function (html)
+            {
+                $("#divResult").html(html);
+            });
+    }
+
+    $("#jsonbutton").click(function(){
+        $.post("/home/JsonCars",
+            { },
+            function (data)
+            {
+                $("#divResult").text(data.length);
+            });
+        })
+
+</script>
+
+<style>
+    #tyuio {
+        float: left;
+        width: 10%;
+    }
+
+    #Isquare {
+        width: 90%;
+        margin: 0 auto;
+        height: 250px;
+    }
+
+    #divResult {
+        margin-left: 80px;
+        width: 30%;
+        height: 190px;
+    }
+</style>

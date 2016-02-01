@@ -1,0 +1,51 @@
+﻿
+<center><p style="font-family: 'Comic Sans MS'; font-size: 20px;">Pictures</p></center>
+
+<div id="apisquare">
+    <input id="apicars" type="button" value="All cars" /> <br/> <br/>
+    <div id="divResult"></div>
+    <input id="idButton" type="text" />
+    <input id="apilicense" type="button" value="Get license" /> </br>
+</div>
+
+
+<script src="~/scripts/jquery.js"></script>
+<script>
+    $("#apicars").click(function()
+    {
+        $.get("/api/cars",
+            { },
+            function (data) {
+                var html = "<ol>";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<li>" + data[i].Brand + "<br/></li>";
+                    html += "<li>" + data[i].Model + "<br/></li>";
+                }
+                html += "</ol>";
+                $("#divResult").html(html);
+            });
+
+    });
+    
+
+
+    $("#apilicense").click(function () {
+        $.get("/api/cars/license",
+            {},
+            function (data){
+                if(idButton == license){
+                    $("#divResult").html(data);
+                }          
+                else
+                    alert("No matching license");
+            
+            });
+    });
+</script>
+
+<style>
+    #apisquare {
+        margin: 0 auto;
+        width: 90%;
+    }
+</style>
