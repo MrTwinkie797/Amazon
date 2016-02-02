@@ -14,17 +14,14 @@ namespace Amazon.Controllers
     public class AmazonController : Controller
     {
         AmazonContext _context;
-
-        public AmazonController(AmazonContext context)
-        {
-            _context = context;
-        }
+        
 
 
         ILogger<AmazonController> _logger;
-        public AmazonController(ILogger<AmazonController> logger)
+        public AmazonController(ILogger<AmazonController> logger, AmazonContext context)
         {
             _logger = logger;
+            _context = context;
         }
         public IActionResult Index()
         {
