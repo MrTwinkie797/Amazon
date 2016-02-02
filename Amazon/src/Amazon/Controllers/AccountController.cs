@@ -29,10 +29,6 @@ namespace Amazon.Controllers
             _identityContext = dbContext;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -44,25 +40,28 @@ namespace Amazon.Controllers
             // Skapa DB-schema
             await _identityContext.Database.EnsureCreatedAsync();
 
-            // Skapa användaren
-            var result = await _userManager.CreateAsync(new IdentityUser(
-                viewModel.UserName), viewModel.Password);
-
-            if (!result.Succeeded)
-            {
-                ModelState.AddModelError(nameof(LoginViewModel.Password), result.Errors.First().Description);
-                return View(viewModel);
-            }
-
             // Logga in användaren
-            await _signInManager.PasswordSignInAsync(viewModel.UserName, viewModel.Password,
+            var result = await _signInManager.PasswordSignInAsync(viewModel.UserName, viewModel.Password,
                 false, false);
 
             // Omdirigera användaren
             if (string.IsNullOrWhiteSpace(returnUrl))
-                return RedirectToAction("Home");
+                return RedirectToAction("Forums", "Amazon");
             else
                 return Redirect(returnUrl);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Logout()
+        {
+
+
+            return RedirectToAction(nameof(AmazonController.Home), "Amazon");
         }
 
         [AllowAnonymous]
@@ -74,8 +73,8 @@ namespace Amazon.Controllers
 
             await _identityContext.Database.EnsureCreatedAsync();
 
-            var result = await _userManager.CreateAsync(new IdentityUser(model.UserName));
-                if (!result.Succeeded);
+            var result = await _userManager.CreateAsync(new IdentityUser(model.UserName),model.Password);
+            if (!result.Succeeded)
             {
                 ModelState.AddModelError("UserName", result.Errors.First().Description);
                 return View(model);
@@ -83,7 +82,15 @@ namespace Amazon.Controllers
 
             await _signInManager.PasswordSignInAsync(model.UserName, model.Password,
                 false, false);
-            return RedirectToAction(nameof(MembersController.Index), "Members");
+            //After register, return to /Amazon/Forums
+            return RedirectToAction(nameof(AmazonController.Forums), "Amazon");
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
         }
     }
 }

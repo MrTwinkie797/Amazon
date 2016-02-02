@@ -1,0 +1,47 @@
+﻿@model Amazon.ViewModels.CreateCommentViewModel
+
+<div id="ewbt4qeuipgbv">
+    <center><p style="font-family: 'Comic Sans MS'; font-size: 20px;">Forums</p></center>
+
+    <div id="addComment">
+        <center><p>Add comment</p></center>
+        <center>
+            <form asp-action="CreateComment">
+                <textarea asp-for="Text" rows="19" cols="20"></textarea><br>
+                <span asp-validation-for="Text"></span>
+                <center><label asp-for="Name"></label>
+<br />
+<input asp-for="Name" />
+<span asp-validation-for="Name"></span></center>
+                <input type="submit" value="Post" />
+            </form>
+        </center>
+    </div>
+
+    <div id="postarea">
+
+
+       @*@Html.Partial("_PostInfoBox", )*@
+    </div>
+
+</div>
+
+<style>
+    #postarea {
+        width: 66%;
+        float: left;
+        height: 550px;
+        border: double;
+    }
+    #addComment {
+        width: 20%;
+        height: 400px;
+        float: right;
+        border: double;
+    }
+    #ewbt4qeuipgbv {
+        margin: 0 auto;
+        width: 90%;
+        height: 600px;
+    }
+</style>

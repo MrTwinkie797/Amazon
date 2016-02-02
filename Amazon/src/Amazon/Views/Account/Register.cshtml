@@ -1,9 +1,10 @@
 ﻿@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 @using Amazon.ViewModels
-@model LoginViewModel
-<center><p style="font-family: 'Comic Sans MS'; font-size: 30px;">Register</p></center>
+@model RegisterViewModel
+    <center><p style="font-family: 'Comic Sans MS'; font-size: 30px;">Register</p></center>
+
 <center>
-    <form asp-action="Login">
+    <form asp-action="Register">
         <label asp-for="UserName"></label>
         <br />
         <input asp-for="UserName" />

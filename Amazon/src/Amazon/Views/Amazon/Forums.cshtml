@@ -1,13 +1,21 @@
 ﻿@addTagHelper"*,Microsoft.AspNet.Mvc.TagHelpers"
+@model ForumsViewModel
 
 <div>
     <center>
         <p style="font-family: 'Comic Sans MS'; font-size: 20px;">Forums</p>
         <ul>
             <li><a asp-action="#">My Page</a></li>
-            <li><a asp-action="#">Activity</a></li>
-            <li><a asp-action="#">Forums</a></li>
-            <li><a asp-action="Login">Log in</a></li>
+            <li><a asp-controller="Amazon" asp-action="CreateComment">Post</a></li>
+            <li><a asp-controller="Amazon" asp-action="ReadComments">Forums</a></li>
+            @if (Model.IsLoggedIn)
+            {
+            <li><a asp-controller="account" asp-action="Logout">Log out</a></li>
+                        }
+                        else {
+            <li><a asp-controller="account" asp-action = "Login">Log in</a></li>
+                    }
+
         </ul>
     </center>
 </div>
@@ -27,23 +35,23 @@
 </script>
 
 <style>
-    #loginbutton {
+#loginbutton {
         font-family: Comic Sans MS;
-        background-color: white;
-        border: none;
-        text-align: center;
-        display: inline-block;
-        text-decoration: none;
-        font-size: 17px;
-    }
-    #square {
-        width: 90%;
+                        background-color: white;
+                        border: none;
+                        text-align: center;
+                        display: inline-block;
+                        text-decoration: none;
+                        font-size: 17px;
+                    }
+#square {
+                    width: 90%;
         margin: 0 auto;
     }
-    ul {
+                ul {
         padding: 0;
     }
-    li {
+            li {
         display: inline;
     }
     a {

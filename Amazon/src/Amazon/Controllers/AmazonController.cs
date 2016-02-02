@@ -13,6 +13,14 @@ namespace Amazon.Controllers
 {
     public class AmazonController : Controller
     {
+        AmazonContext _context;
+
+        public AmazonController(AmazonContext context)
+        {
+            _context = context;
+        }
+
+
         ILogger<AmazonController> _logger;
         public AmazonController(ILogger<AmazonController> logger)
         {
@@ -31,19 +39,19 @@ namespace Amazon.Controllers
         }
         public IActionResult Forums()
         {
-            return View();
-        }
-        public IActionResult Login()
-        {
-            return View("~/Views/Account/Login.cshtml");
-        }
-        public IActionResult Register()
-        {
-            return View("~/Views/Account/Register.cshtml");
+            var model = new ForumsViewModel();
+            model.IsLoggedIn = User.Identity.IsAuthenticated;
+            return View(model);
         }
         public IActionResult Pictures()
         {
             return View();
+        }
+        public IActionResult Logout()
+        {
+            var model = new ForumsViewModel();
+            model.IsLoggedIn = User.Identity.IsAuthenticated;
+            return View(model);
         }
         public IActionResult Home()
         {
@@ -54,6 +62,25 @@ namespace Amazon.Controllers
             var models = DataManager.GetAll();
 
             return View(models);
+        }
+        
+        public IActionResult CreateComment()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateComment(CreateCommentViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+
+
+            return RedirectToAction("ReadComments");
+        }
+        public IActionResult ReadComments()
+        {
+            return View();
         }
     }
 }

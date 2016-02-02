@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
+using Amazon.Models;
 
 namespace Amazon
 {
@@ -25,14 +26,15 @@ namespace Amazon
                 .AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(connString));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-                options.Password.RequiredLength = 6;
-                options.Password.RequireNonLetterOrDigit = false;
-                options.Cookies.ApplicationCookie.LoginPath = "/account/login";
-            })
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
+
+            services
+                .AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<AmazonContext>(
+                options => options.UseSqlServer(connString));
 
             services.AddMvc();
         }
@@ -44,21 +46,14 @@ namespace Amazon
         {
             loggerFactory.AddConsole(minLevel: LogLevel.Information);
 
-
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-            else
-                app.UseExceptionHandler("/Shared/Error");
-            app.UseMvcWithDefaultRoute();
+            
 
             app.UseStatusCodePagesWithReExecute("/StatusCodes/Statuscode{0}");
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
                 app.UseExceptionHandler("/Shared/Error");
-                app.UseMvcWithDefaultRoute();
 
-            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();

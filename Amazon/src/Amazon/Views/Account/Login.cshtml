@@ -1,4 +1,4 @@
-﻿@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+﻿
 @using Amazon.ViewModels
 @model LoginViewModel
     <center><p style="font-family: 'Comic Sans MS'; font-size: 30px;">Log in</p></center>
@@ -17,13 +17,11 @@
         <br />
         <input type="submit" value="Log in" />
     </form>
-
     <p>
         Don't you have an account?<br />
-        Register<a id="befiwpfbiwe" asp-action="Register">here</a>
+        Register<a id="befiwpfbiwe" asp-action="Register" asp-controller="Account">here</a>
     </p>
 </center>
-
 
 
 <script src="~/Scripts/jquery.min.js"></script>

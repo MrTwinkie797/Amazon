@@ -8,7 +8,7 @@ namespace Amazon.Models
         {
             return new ListEngineViewModel[]
             {
-                new ListEngineViewModel {Id = 1, Type = "B16", Litre = 1.6, Bhp = 66, TopSpeed = 140, Info = "This is B16" },
+                new ListEngineViewModel {Id = 1, Type = "B16", Litre = 1.6, Bhp = 66, TopSpeed = 140, Info = "The B16 engine was the first enginen being put in to an Amazon. It was a 1,6 liter and was quickly changed to the better B18" },
                 new ListEngineViewModel {Id = 2, Type = "B16A", Litre = 1.6, Bhp = 60, TopSpeed = 140, Info = "This is something" },
                 new ListEngineViewModel {Id = 3, Type = "B16B", Litre = 1.6, Bhp = 78, TopSpeed = 140, Info = "This is something" },
                 new ListEngineViewModel {Id = 4, Type = "B16C", Litre = 1.6, Bhp = 60, TopSpeed = 140, Info = "This is something" },
