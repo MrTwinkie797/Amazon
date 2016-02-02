@@ -7,10 +7,12 @@
             <li><a asp-action="#">My Page</a></li>
             <li><a asp-action="#">Activity</a></li>
             <li><a asp-action="#">Forums</a></li>
-            <li><input id="loginbutton" type="submit" value="Login" /></li>
+            <li><a asp-action="Login">Log in</a></li>
         </ul>
     </center>
 </div>
+
+
 
 <div id="square">
 
@@ -18,10 +20,10 @@
 
 <script src="~/scripts/jquery.js"></script>
 <script>
-    $("#loginbutton").click(function()
-    {
-        alert("Button pressed");   
-    })
+    //$("#loginbutton").click(function()
+    //{
+    //    $("#loginbutton").val("Log out");
+    //})
 </script>
 
 <style>

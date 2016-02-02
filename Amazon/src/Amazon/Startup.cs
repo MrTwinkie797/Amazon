@@ -8,6 +8,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using Microsoft.Extensions.Logging;
 
 namespace Amazon
 {
@@ -17,14 +18,19 @@ namespace Amazon
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var connString = @"Data Source = (localdb)\mssqllocaldb; Initial Catalog = AmazonDb; Integrated Security = True; Pooling = False";
+            var connString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=AmazoDb;Integrated Security=True;Pooling=False";
 
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<IdentityDbContext>(options =>
-                    options.UseSqlServer(connString));
+                options.UseSqlServer(connString));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonLetterOrDigit = false;
+                options.Cookies.ApplicationCookie.LoginPath = "/account/login";
+            })
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -32,13 +38,37 @@ namespace Amazon
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, 
+                IHostingEnvironment env, 
+                ILoggerFactory loggerFactory)
         {
-            app.UseStaticFiles();
+            loggerFactory.AddConsole(minLevel: LogLevel.Information);
+
+
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            else
+                app.UseExceptionHandler("/Shared/Error");
             app.UseMvcWithDefaultRoute();
+
+            app.UseStatusCodePagesWithReExecute("/StatusCodes/Statuscode{0}");
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            else
+                app.UseExceptionHandler("/Shared/Error");
+                app.UseMvcWithDefaultRoute();
+
             app.UseDeveloperExceptionPage();
+            app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Account}/{action=Login}");
+            });
         }
 
         // Entry point for the application.

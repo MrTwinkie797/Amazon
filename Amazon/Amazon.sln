@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F72373E2-355E-4D73-B30C-18F89526247C}"
+	ProjectSection(SolutionItems) = preProject
+		src\Amazon\ViewModels\AccountController.cs = src\Amazon\ViewModels\AccountController.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{70CDEFD6-9F5D-418C-8C2A-755C82E5BE9C}"
 	ProjectSection(SolutionItems) = preProject

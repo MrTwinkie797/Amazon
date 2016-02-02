@@ -1,0 +1,22 @@
+﻿@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+@using Amazon.ViewModels
+@model LoginViewModel
+<center><p style="font-family: 'Comic Sans MS'; font-size: 30px;">Register</p></center>
+<center>
+    <form asp-action="Login">
+        <label asp-for="UserName"></label>
+        <br />
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+        <br />
+        <label asp-for="Password"></label>
+        <br />
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+        <br />
+        <input type="submit" value="Register" />
+    </form>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</center>
