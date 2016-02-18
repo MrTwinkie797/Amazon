@@ -1,22 +1,14 @@
 ﻿
+@model Amazon.Models.Comment
+
+
 <div id="ewbt4qeuipgbv">
     <center><p style="font-family: 'Comic Sans MS'; font-size: 20px;">Forums</p></center>
 
-    <div id="addComment">
-        <center><p>Add comment</p></center>
-        <center>
-            <form action="#">
-                <textarea rows="19" cols="20"></textarea><br>
-                <center>Name: <input type="text" name="fname"><br></center>
-                <input type="submit" value="Post" />
-            </form>
-        </center>
-    </div>
-
     <div id="postarea">
 
+        @Html.Partial("_PostInfoBox")
 
-       @Html.Partial("_PostInfoBox")
     </div>
 
 </div>
@@ -26,12 +18,6 @@
         width: 66%;
         float: left;
         height: 550px;
-        border: double;
-    }
-    #addComment {
-        width: 20%;
-        height: 400px;
-        float: right;
         border: double;
     }
     #ewbt4qeuipgbv {

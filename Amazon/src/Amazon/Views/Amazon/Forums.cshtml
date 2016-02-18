@@ -8,15 +8,17 @@
             <li><a asp-action="#">My Page</a></li>
             <li><a asp-controller="Amazon" asp-action="CreateComment">Post</a></li>
             <li><a asp-controller="Amazon" asp-action="ReadComments">Forums</a></li>
+        </ul>
+        <ul>
             @if (Model.IsLoggedIn)
             {
-            <li><a asp-controller="account" asp-action="Logout">Log out</a></li>
-                        }
-                        else {
-            <li><a asp-controller="account" asp-action = "Login">Log in</a></li>
-                    }
-
+                <li><a asp-controller="account" asp-action="Logout">Log out</a></li>
+            }
+            else {
+                <li><a asp-controller="account" asp-action="Login">Log in</a></li>
+            }
         </ul>
+
     </center>
 </div>
 

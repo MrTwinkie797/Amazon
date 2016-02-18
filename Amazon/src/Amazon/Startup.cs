@@ -46,8 +46,6 @@ namespace Amazon
         {
             loggerFactory.AddConsole(minLevel: LogLevel.Information);
 
-            
-
             app.UseStatusCodePagesWithReExecute("/StatusCodes/Statuscode{0}");
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();

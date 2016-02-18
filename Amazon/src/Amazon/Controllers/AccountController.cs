@@ -46,7 +46,7 @@ namespace Amazon.Controllers
 
             // Omdirigera användaren
             if (string.IsNullOrWhiteSpace(returnUrl))
-                return RedirectToAction("Forums", "Amazon");
+                return RedirectToAction("Index", "Tentamen");
             else
                 return Redirect(returnUrl);
         }
